@@ -1,0 +1,21 @@
+.vehicleTableWrap {
+  width: 25%;
+  height: 80vh;
+  overflow-y: scroll;
+  font-size: 12px;
+  line-height: 14px;
+  // margin-right: 10px;
+}
+
+.vehicleTable {
+  width: 100%;
+  position: relative;
+}
+
+.vehicleTableHead {
+  font-size: 16px;
+}
+
+.RowVehicle.active {
+  background-color: $secondary-color;
+}

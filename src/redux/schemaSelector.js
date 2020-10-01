@@ -1,0 +1,1 @@
+export const GetSchema = (state) => { return state.SchemaState.enumSchema }

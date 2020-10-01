@@ -1,0 +1,16 @@
+.Navi-Link {
+  color: $text-primary;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 600;
+}
+
+.Navi-Link:hover{
+  color: $secondary-color;
+  text-decoration: none;
+}
+
+.Navi-Link.active {
+  color: $secondary-color;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,21 @@
+$primary-color: #263238;
+$primary-light:#4f5b62;
+$primary-super-light:#a4a7a8;
+$primary-dark:#000a12;
+
+$secondary-color:#2196f3;
+$secondary-light:#6ec6ff;
+$seondary-dark:#0069c0;
+
+$text-primary: #ffffff;
+$text-secondary: #000000;
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import './components/Header/Header.scss';
+@import './components//Header/Navi.scss';
+@import './components/Refuelling/Refuelling.scss';
+@import './components/ShiftTable/ShiftTable.scss';
+@import './components/Vehicles/Vehicles.scss';
+@import './components/Vehicles/VehicleTable.scss';
+@import './components/Vehicles/Schema.scss';
+@import './components/Vehicles/VehicleProperties.scss';
