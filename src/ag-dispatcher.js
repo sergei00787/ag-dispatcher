@@ -4,7 +4,8 @@ const config = {
   // "agPassword": "testdsa"
   "agApiBaseUrl": "http://demo.tk-nav.com/ServiceJSON/",
   "agLogin": "demo",
-  "agPassword": "demo"
+  "agPassword": "demo",
+  "asdApiBaseUrl": "http://localhost:3001/"
 };
 
 export default config;

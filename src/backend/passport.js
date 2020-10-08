@@ -1,6 +1,5 @@
 const db = require("./models/");
 const User = db.user;
-const Op = db.Sequelize.Op;
 
 const passport = require('passport');
 const passportJWT = require("passport-jwt");
@@ -13,40 +12,28 @@ const JWTStrategy = passportJWT.Strategy;
 const bcrypt = require("bcryptjs");
 
 
-function getHash(pwd) {
-  const salt = bcrypt.genSaltSync(10);
-  return bcrypt.hashSync(pwd, salt);
-}
-
-
 passport.use(new LocalStrategy({
   usernameField: 'username',
   passwordField: 'password'
 },
-  function (username, password, cb) {
+  function (username, password, fn) {
 
     //Assume there is a DB module pproviding a global UserModel
-    return User.findOne(
-      {
-        where: { username: username }
-      }
+    return User.findOne({ where: { username: username }}
     )
       .then(user => {
         if (!user || !bcrypt.compareSync(password, user.password)) {
-
-          return cb(null, false, { message: 'Incorrect email or password.' });
+          return fn(null, false, { message: 'Incorrect email or password.' });
         }
-        return cb(null, user.dataValues, {
-          message: 'Logged In Successfully'
-        });
+        return fn(null, user.dataValues, { message: 'Logged In Successfully' });
       })
       .catch(err => {
-        return cb(err);
+        return fn(err);
       });
   }
 ));
 
-let cookieExtractor = function(req) {
+let cookieExtractor = function (req) {
   var token = null;
   if (req && req.cookies) token = req.cookies['asdtoken'];
   return token;

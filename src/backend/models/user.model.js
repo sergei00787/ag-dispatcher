@@ -20,7 +20,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
       allowNull: false,
       set(value) {
-        getHash(value)
+        this.setDataValue('password', getHash(value));
       }
     },
     email: {

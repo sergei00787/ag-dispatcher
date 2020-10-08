@@ -1,4 +1,4 @@
-import { schemaAgApi } from '../api/api';
+import { schemaAgApi } from '../api/apiAG';
 
 const SET_ENUM_DEVICES = "ag-dispatcher/Vehicles/SET_ENUM_DEVICES";
 const SET_ID_SELECTED_DEVICES = "ag-dispatcher/Vehicles/SET_ID_SELECTED_DEVICES";

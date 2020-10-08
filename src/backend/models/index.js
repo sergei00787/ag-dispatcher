@@ -22,7 +22,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.instSequelize = instSequelize;
 
-instSequelize.sync({});
+//instSequelize.sync({});
 
 // BIND Models to DB
 db.user = require("./user.model.js")(instSequelize, Sequelize);

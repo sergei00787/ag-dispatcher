@@ -2,19 +2,10 @@ const db = require("../models");
 const User = db.user;
 const { v4: uuidv4 } = require("uuid");
 const Op = db.Sequelize.Op;
-// const bcrypt = require("bcryptjs");
-
-
-// function getHash(pwd) {
-//   const salt = bcrypt.genSaltSync(10);
-//   return bcrypt.hashSync(pwd, salt);
-// }
 
 // Create and Save a new user
 exports.create = (req, res) => {
   // Validate request
-
-  // НЕОБХОДИМО ДОБАВИТЬ провЕрКу НА уже существующего пользователя
 
   if (!req.body.username || !req.body.password) {
     res.status(400).send({
@@ -23,29 +14,48 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a user
-  const user = {
-    id: uuidv4(),
-    username: req.body.username,
-    password: req.body.password,
-    email: req.body.email,
-    domainAuth: req.body.domainauth ? req.body.domainauth : false,
-    domainName: req.body.domainname,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  };
-
-  // Save user in the database
-  User.create(user)
+  // Validate user has already been exist, return status 500
+  User.findOne({ where: { username: req.body.username } })
     .then(data => {
-      res.send(data);
+      if (data && data.dataValues) {
+        res.status(400).send({
+          message: "Exist!"
+        });
+      } else {
+        const user = {
+          id: uuidv4(),
+          username: req.body.username,
+          password: req.body.password,
+          email: req.body.email,
+          domainAuth: req.body.domainauth ? req.body.domainauth : false,
+          domainName: req.body.domainname,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+
+        // Save user in the database
+        User.create(user)
+          .then(data => {
+            res.send(data);
+          })
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while creating the User."
+            });
+          });
+      }
+      // Create a user
+
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Some error occurred while creating the User."
       });
     });
+
+
 };
 
 // Retrieve all user from the database.

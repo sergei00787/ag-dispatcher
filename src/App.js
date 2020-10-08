@@ -1,28 +1,11 @@
 import React from 'react';
 import './App.scss';
-import Header from './components/Header/Header'
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import Vehicles from './components/Vehicles/Vehicles';
-import Refuelling from './components/Refuelling/Refuelling';
 import { initializeApp } from './redux/appReducer';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Spinner, Alert } from 'react-bootstrap';
-
-const shifts = [
-  { id: 12, date: '21.09.2020', shift: '4' },
-  { id: 11, date: '21.09.2020', shift: '3' },
-  { id: 10, date: '21.09.2020', shift: '2' },
-  { id: 9, date: '21.09.2020', shift: '1' },
-  { id: 8, date: '20.09.2020', shift: '4' },
-  { id: 7, date: '20.09.2020', shift: '3' },
-  { id: 6, date: '20.09.2020', shift: '2' },
-  { id: 5, date: '20.09.2020', shift: '1' },
-  { id: 4, date: '19.09.2020', shift: '4' },
-  { id: 3, date: '19.09.2020', shift: '3' },
-  { id: 2, date: '19.09.2020', shift: '2' },
-  { id: 1, date: '19.09.2020', shift: '1' },
-];
+import LoginScreen from './components/LoginScreen';
+import MainScreen from './components/MainScreen';
 
 
 class App extends React.Component {
@@ -47,30 +30,8 @@ class App extends React.Component {
 
       return (
         <div className="App">
-          <BrowserRouter>
-            <Header />
-            <Switch>
-              {/* <Route path="/login">
-                  <LoginContainer />
-                  <div></div>
-                </Route> */}
-              <Route path="/vehicles">
-                <Vehicles />
-              </Route>
-              <Route path="/waylists">
-                <div>WAYLIST</div>
-              </Route>
-              <Route path="/logs">
-                <div>LOGS</div>
-              </Route>
-              <Route path="/refuelling">
-                <Refuelling shifts={shifts} />
-              </Route>
-
-              <Redirect from="/" to="/refuelling"></Redirect>
-
-            </Switch>
-          </BrowserRouter>
+          {!this.props.isAuth? <LoginScreen /> : <MainScreen />  }         
+                   
         </div>
       );
     }
@@ -86,7 +47,8 @@ const mapStateToProps = (state) => {
   return {
     initialized: state.AppState.initialized,
     error: state.AppState.error,
-    isInitInProgress: state.AppState.isInitInProgress
+    isInitInProgress: state.AppState.isInitInProgress,
+    isAuth: state.LoginState.isAuth
   }
 }
 

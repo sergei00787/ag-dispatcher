@@ -1,5 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-//mport loginReducer from './loginReducer';
+import loginReducer from './loginReducer';
 import schemaReducer from './schemaReducer';
 import appReducer from './appReducer'
 import vehiclesReducer from './vehiclesReducer';
@@ -12,7 +12,7 @@ import { compose } from 'redux';
 let reducers = combineReducers(
   {
     AppState: appReducer, // State APP - loginAG, PassAG, AG-Token
-    //LoginState: loginReducer,
+    LoginState: loginReducer,
     SchemaState: schemaReducer,
     VehiclesState: vehiclesReducer,
     form: formReducer

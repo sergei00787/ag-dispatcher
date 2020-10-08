@@ -1,13 +1,19 @@
-import { loginAgApi } from '../api/api'
+import { loginAsdApi } from '../api/apiAsdMechel'
 
-const initialState = { login: 'test', password: 'ttttt123', agToken: null, error: null  }
+const initialState = { 
+  username: 'asd', 
+  password: 'asd', 
+  asdtoken: null, 
+  error: null, 
+  isAuth: false }
 //const initialState = { login: 'demo', password: 'demo', agToken: null, error: null }
 
 const LOGIN_SUCCESS = 'agDispatcher/Login/LOGIN_SUCCESS';
-const LOGIN_CHANGE = 'agDispatcher/Login/LOGIN_CHANGE';
+const USERNAME_CHANGE = 'agDispatcher/Login/USERNAME_CHANGE';
 const PASSWORD_CHANGE = 'agDispatcher/Login/PASSWORD_CHANGE';
-const SET_AG_TOKEN = 'agDispatcher/Login/SET_AG_TOKEN';
+const SET_TOKEN = 'agDispatcher/Login/SET_ASD_TOKEN';
 const SET_ERROR = 'agDispatcher/Login/SET_ERROR';
+const LOGOUT_ASD = 'agDispatcher/Login/LOGOUT_ASD';
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -15,10 +21,10 @@ export default (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return { ...state };
 
-    case LOGIN_CHANGE:
+    case USERNAME_CHANGE:
       return {
         ...state,
-        login: action.login
+        username: action.username
       };
 
     case PASSWORD_CHANGE:
@@ -27,16 +33,24 @@ export default (state = initialState, action) => {
         password: action.password
       };
 
-    case SET_AG_TOKEN:
+    case SET_TOKEN:
       return {
         ...state,
-        agToken: action.agToken
+        asdtoken: action.asdtoken,
+        isAuth: true
       };
 
       case SET_ERROR:
         return {
           ...state,
           error: action.errMessage
+        };
+      
+      case LOGOUT_ASD:
+        return {
+          ...state,
+          asdtoken: null,
+          isAuth: false
         }
 
     default:
@@ -44,21 +58,37 @@ export default (state = initialState, action) => {
   }
 };
 
-export const loginChange = (login) => ({ type: LOGIN_CHANGE, login });
+export const loginChange = (username) => ({ type: USERNAME_CHANGE, username });
 export const passwordChange = (password) => ({ type: PASSWORD_CHANGE, password });
-export const setAgToken = (agToken) => ({ type: SET_AG_TOKEN, agToken });
-export const setError = (errMessage) => ({type: SET_ERROR, errMessage})
+export const setAsdToken = (asdToken) => ({ type: SET_TOKEN, asdToken });
+export const setError = (errMessage) => ({type: SET_ERROR, errMessage});
+export const logout = () => ({type:LOGOUT_ASD});
 
-export const loginTC = (login, password) => async (dispatch) => {
+export const loginTC = (username, password) => async (dispatch) => {
   try {
-    let response = await loginAgApi.getAgToken(login, password);
+    let response = await loginAsdApi.getAsdToken(username, password);
     if (response.status === 200) {
-      dispatch(setAgToken(response.data));
+      console.log(response.data)
+      dispatch(setAsdToken(response.data.asdtoken));
     } 
   }  
   catch(err) {
     dispatch(setError(err));
   }
   
+}
+
+export const logoutTC = () => async(dispatch) => {
+  try {
+    let response = await loginAsdApi.logOutAsd();
+    if (response.status === 200) {
+      console.log(response)
+      dispatch(logout());
+      // dispatch(setAsdToken(response.data.asdtoken));
+    } 
+  }  
+  catch(err) {
+    dispatch(setError(err));
+  }
 }
 

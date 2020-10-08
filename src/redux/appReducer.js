@@ -1,4 +1,4 @@
-import { loginAgApi, updAgTokenInstanceAxios } from '../api/api.js';
+import { loginAgApi, updAgTokenInstanceAxios } from '../api/apiAG.js';
 import config from './../ag-dispatcher';
 
 const initialState = {

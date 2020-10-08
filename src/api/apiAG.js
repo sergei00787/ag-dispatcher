@@ -1,5 +1,5 @@
 import axios from 'axios';
-import config from './../ag-dispatcher';
+import config from '../ag-dispatcher';
 
 let agInstanceAxios = axios.create({
   baseURL: config.agApiBaseUrl,

@@ -1,4 +1,4 @@
-import { schemaAgApi } from '../api/api';
+import { schemaAgApi } from '../api/apiAG';
 import { getEnumDevicesTC } from './vehiclesReducer.js';
 
 const SET_ENUM_SCHEMA = "ag-dispatcher/Schema/SET_ENUM_SCHEMA";
