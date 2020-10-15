@@ -13,9 +13,10 @@ const app = express();
 const port = 3001;
 
 let corsOptions = {
-  // origin: "http://localhost:3000"
-  origin: "http://localhost",
-  // credentials: true
+    origin: "http://localhost:3000",
+    //origin: "*",
+    preflightContinue: false,
+    credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -25,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser("asdtoken"));
 
 app.get('/', (req, res) => {
-  res.json({ message: "Welcome to API Asd-Mechel" });
+    res.json({ message: "Welcome to API Asd-Mechel" });
 })
 
 // app.use('/', index);
@@ -37,24 +38,24 @@ app.use("/users", passport.authenticate('jwt',{ session: false }) , userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`)
+    console.log(`Server is running at http://localhost:${port}`)
 })
 
 module.exports = app;

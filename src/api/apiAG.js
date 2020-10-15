@@ -42,7 +42,7 @@ class Schemas {
 
   getAgDevices = async (shemaId) => {
     try {
-      const response = await agInstanceAxios.get("EnumDevices", {params: { "schemaID": shemaId } });
+      const response = await agInstanceAxios.get("EnumDevices", { params: { "schemaID": shemaId } });
       return response;
     }
     catch (error) {
@@ -50,6 +50,29 @@ class Schemas {
     }
 
   }
+
+  getAgTrips = async (schemaId, guids, SD, ED, tripParams) => {
+    try {
+      const schm = "d28e3930-7faa-469d-9551-7ed561830b09";
+      const response = await agInstanceAxios.get("GetTrips", { params: { "schemaID": schm, "IDs": guids, "SD": SD, "ED": ED, "tripSplitterIndex": -1, "tripParams": tripParams, "tripTotalParams": tripParams } });
+      return response;
+    }
+    catch (error) {
+      console.error("ОШИБКА!!!!-" + error);
+    }
+  }
+
+  getAgStage = async (schemaId, guids, SD, ED, tripParams) => {
+    try {
+      const schm = "d28e3930-7faa-469d-9551-7ed561830b09";
+      const response = await agInstanceAxios.get("GetStage", { params: { "schemaID": schm, "IDs": guids, "SD": SD, "ED": ED, "stageName": "Tank*", "tripParams": tripParams, "tripTotalParams": tripParams } });
+      return response;
+    }
+    catch (error) {
+      console.error("ОШИБКА!!!!-" + error);
+    }
+  }
+
 }
 
 export const loginAgApi = new Login();

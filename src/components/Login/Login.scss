@@ -1,0 +1,24 @@
+.Login-wrap {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LoginForm{
+  height: 40vh ;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LoginForm label{
+ margin-bottom: 20px;
+}
+
+.Login-Logo {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}

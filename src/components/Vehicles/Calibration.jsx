@@ -29,7 +29,7 @@ const Calibration = (props) => {
           <tbody className="VehiclePropertiesTableBody">
             {props.list.Items.map(item => {
               return (
-                <tr>
+                <tr key={item.Output}>
                   <td>{item.Output}</td>
                   <td>{item.Input}</td>
                 </tr>

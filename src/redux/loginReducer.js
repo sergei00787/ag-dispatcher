@@ -68,7 +68,6 @@ export const loginTC = (username, password) => async (dispatch) => {
   try {
     let response = await loginAsdApi.getAsdToken(username, password);
     if (response.status === 200) {
-      console.log(response.data)
       dispatch(setAsdToken(response.data.asdtoken));
     } 
   }  
@@ -82,9 +81,7 @@ export const logoutTC = () => async(dispatch) => {
   try {
     let response = await loginAsdApi.logOutAsd();
     if (response.status === 200) {
-      console.log(response)
       dispatch(logout());
-      // dispatch(setAsdToken(response.data.asdtoken));
     } 
   }  
   catch(err) {

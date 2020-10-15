@@ -32,22 +32,25 @@ class Login {
       withCredentials: true
     }
 
-
     // const response = await asdInstanceAxios.post("/auth/login", formData);
-    
-    const response = await asdInstanceAxios.post("/auth/login", qs.stringify(requestBody), config);
-    
-    if (response.status === 200) {
-      asdInstanceAxios.defaults.headers.common['asdtoken'] = response.data;
+    try {
+      const response = await asdInstanceAxios.post("/auth/login", qs.stringify(requestBody), config);
+
+      if (response.status === 200) {
+        asdInstanceAxios.defaults.headers.common['asdtoken'] = response.data;
+      }
+      return response;
     }
-    return response;
+    catch(error){
+      return error;
+    }
+    
   }
 
   logOutAsd = async () => {
     const response = await asdInstanceAxios.get("/auth/logout");
-    
+
     if (response.status === 200) {
-      console.log(response);
     }
     return response;
   }

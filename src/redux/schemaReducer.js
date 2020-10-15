@@ -45,7 +45,7 @@ export const getEnumShemasTC = () => async (dispatch) => {
     }
   }
   catch (error) {
-    console.log('Error in thunk getEnumShamasTC! - ' + error);
+    return error;
   }
 }
 
@@ -55,7 +55,7 @@ export const selectSchema = (schemaId) => (dispatch) => {
   }
 
   catch (error) {
-    console.log('Error in thunk selectSchema! - ' + error);
+    return error;
   }
 }
 

@@ -43,7 +43,7 @@ export const getEnumDevicesTC = (schemaId) => async (dispatch) => {
     }
   }
   catch (error) {
-    console.log('Error in thunk getEnumDeviceTC! - ' + error);
+    return error;
   }
 }
 export const selectDevice = (idDevice) => (dispatch) => {
@@ -51,6 +51,6 @@ export const selectDevice = (idDevice) => (dispatch) => {
     dispatch(setIdSelectedDevice(idDevice));
   }
   catch (error) {
-    console.log('Error in thunk selectDevice! - ' + error);
+    return error;
   }
 }
