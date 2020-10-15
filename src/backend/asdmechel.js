@@ -13,9 +13,10 @@ const app = express();
 const port = 3001;
 
 let corsOptions = {
-  // origin: "http://localhost:3000"
-  origin: "http://localhost",
-  // credentials: true
+  origin: "http://localhost:3000",
+  //origin: "*",
+  preflightContinue: false,
+  credentials: true
 };
 
 app.use(cors(corsOptions));
@@ -31,19 +32,19 @@ app.get('/', (req, res) => {
 // app.use('/', index);
 
 app.use('/auth', authRouter);
-app.use("/users", passport.authenticate('jwt',{ session: false }) , userRouter);
+app.use("/users", passport.authenticate('jwt', { session: false }), userRouter);
 // app.use("/users", userRouter);
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
