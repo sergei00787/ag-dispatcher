@@ -3,8 +3,6 @@ import config from '../ag-dispatcher';
 
 let agInstanceAxios = axios.create({
   baseURL: config.agApiBaseUrl,
-  //baseURL: "http://212.77.128.19:17201/ServiceJSON/",
-  //withCredentials: true,
   headers: { 'Access-Control-Allow-Origin': '*' }
 })
 
