@@ -19,7 +19,7 @@ class Vehicles extends Component {
   }
 
   onSelectSchema(e) {
-    selectSchema(e.currentTarget.value);
+    this.props.selectSchema(e.currentTarget.value);
     this.props.getEnumDevicesTC(e.currentTarget.value);
   }
 
@@ -28,7 +28,7 @@ class Vehicles extends Component {
 
       <div className="Vehicles d-flex flex-column">
         <Schema
-          onSelectSchema={this.props.onSelectSchema}
+          onSelectSchema={this.onSelectSchema.bind(this)}
           idSchemaSelected={this.props.idSchemaSelected}
           enumSchema={this.props.enumSchema} />
 

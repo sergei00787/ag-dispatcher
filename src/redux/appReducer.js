@@ -39,19 +39,21 @@ const appReducer = (state = initialState, action) => {
         error: action.errMessage
       }
 
-    case SUCCESS_INITIALIZED: {
-      return {
-        ...state,
-        initialized: true
+    case SUCCESS_INITIALIZED:
+      {
+        return {
+          ...state,
+          initialized: true
+        }
       }
-    }
 
-    case SET_INIT_IN_PROGRESS: {
-      return {
-        ...state,
-        isInitInProgress: action.inProgress
+    case SET_INIT_IN_PROGRESS:
+      {
+        return {
+          ...state,
+          isInitInProgress: action.inProgress
+        }
       }
-    }
 
     default:
       return state
@@ -74,17 +76,16 @@ export const loginAG = (login, password) => async (dispatch) => {
       dispatch(setAgToken(null));
       throw new Error();
     }
-  }
-  catch (err) {
+  } catch (err) {
     dispatch(setError(err));
-  }
-  finally {
+  } finally {
     dispatch(setInitInProgress(false));
   }
 
 }
 
 export const fetchAgToken = (dispatch, getState) => {
+  console.log('asd')
   if (!getState().AppState.initialized) dispatch(setInitInProgress(true));
 
   const { login, password } = getState().AppState;

@@ -6,6 +6,7 @@ import vehiclesReducer from './vehiclesReducer';
 import thunkMiddleware from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
 import { compose } from 'redux';
+import refuellingReducer from './refuellingReducer';
 
 
 
@@ -15,6 +16,7 @@ let reducers = combineReducers(
     LoginState: loginReducer,
     SchemaState: schemaReducer,
     VehiclesState: vehiclesReducer,
+    RefuellingState: refuellingReducer,
     form: formReducer
   }
 )

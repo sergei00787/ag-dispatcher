@@ -5,8 +5,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Spinner, Alert } from 'react-bootstrap';
 import LoginScreen from './components/LoginScreen';
-import MainScreen from './components/MainScreen';
 
+import MainScreen from './components/MainScreen';
 
 class App extends React.Component {
   componentDidMount() {
@@ -30,8 +30,9 @@ class App extends React.Component {
 
       return (
         <div className="App">
-          {!this.props.isAuth? <LoginScreen /> : <MainScreen />  }         
-                   
+          {/* <MainScreen /> */}
+          {!this.props.isAuth ? <LoginScreen /> : <MainScreen />}
+
         </div>
       );
     }
