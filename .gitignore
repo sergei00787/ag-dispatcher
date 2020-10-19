@@ -4,7 +4,7 @@
 /node_modules
 /.pnp
 .pnp.js
-src/ag-dispatcher.js
+/src/ag-dispatcher.js
 
 # testing
 /coverage
